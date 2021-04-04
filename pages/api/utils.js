@@ -31,9 +31,11 @@ export const normalizeQuestion = (q) => {
         q.solutionText.html = getCleanHTML(q.solutionText.html);
     }
     if (isNull(q.options)) {
-        q.options = [];
+        q.options = {_v:[]};
+    }else if (isNull(q.options._v)) {
+        q.options._v = [];
     }else{
-        q.options.map(o => {
+        q.options._v.map((o) => {
             if (isNull(o.html)){
                 o.html = "";
             }
