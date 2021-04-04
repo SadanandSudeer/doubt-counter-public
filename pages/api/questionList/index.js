@@ -20,7 +20,6 @@ handlerQ.post(async (req, res) => {
     searchReq.hasTopics = searchReq.Topics.length > 0
     searchReq.hasExams = searchReq.Exams.length > 0
     searchReq.hasPriorExams = searchReq.PriorExams.length > 0
-    console.info("7");
     let basePipeline = [];
 
     if (searchReq.hasSearchText){
@@ -140,17 +139,10 @@ handlerQ.post(async (req, res) => {
     basePipeline.push({"$sort": {"score": -1}});
     basePipeline.push({"$skip": searchReq.skip})
     basePipeline.push({"$limit": searchReq.limit});
-    console.info("6");
     let questionIds = await req.db.collection('Question').aggregate(basePipeline).toArray();
-    console.info("5");
     let ids = [];
     questionIds.map(q => ids.push(ObjectID(q._id)));
-    console.info("4");
-    let files = await req.db.collection("Question").find({"_id": { $in: ids}}).toArray();
-    let questions = [];
-    console.info("3");
-    files.map(f => questions.push(normalizeQuestion(f)));
-    console.info("2");
+    let files = await req.db.collection("QuestionPublic").find({"_id": { $in: ids}}).toArray();
     res.json(files);
 });
 export default handlerQ;

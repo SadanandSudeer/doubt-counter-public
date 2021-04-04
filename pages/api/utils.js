@@ -33,7 +33,20 @@ export const normalizeQuestion = (q) => {
     if (isNull(q.options)) {
         q.options = {_v:[]};
     }else if (isNull(q.options._v)) {
-        q.options._v = [];
+        if (q.options.length == 0 || isNull(q.options[0])){
+            q.options={_v:[]};
+        }
+        let opts = [];
+        q.options.map( o=> {
+            if (isNull(o.html)){
+                o.html = "";
+            }
+            else{
+                o.html = getCleanHTML(o.html)
+            }
+            opts.push(0);
+        })
+        q.options._v = opts;
     }else{
         q.options._v.map((o) => {
             if (isNull(o.html)){

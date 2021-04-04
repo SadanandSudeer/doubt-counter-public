@@ -1,12 +1,12 @@
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
 import middleware from '../../database';
-import {normalizeQuestion, getSearchText } from '../../utils';
+import { getSearchText } from '../../utils';
 const handler = nextConnect();
 handler.use(middleware);
 handler.get(async (req, res) => {
-    let doc = await req.db.collection('Question').find({"_id": ObjectID(req.query.id)}).toArray();
-    let response = {question: normalizeQuestion(doc[0]), similarQuestions:[]};
+    let doc = await req.db.collection('QuestionPublic').find({"_id": ObjectID(req.query.id)}).toArray();
+    let response = {question: doc[0], similarQuestions:[]};
     
     if (response.question === null){
         res.json({});
@@ -22,13 +22,15 @@ handler.get(async (req, res) => {
             { $match: { $text: { $search: qText } } },
             { $addFields: {score: { $meta: "textScore" }}},
             { $sort: { score : -1 } }, 
-            { $limit : 11 }        
+            { $limit : 11 },
+            { $project: {"_id": "$_id"}}
         ]
-     ).toArray();
+        ).toArray();
     }
-
-    similarQuestions.map(q => response.similarQuestions.push(normalizeQuestion(q)));
-
+    let ids = []
+    similarQuestions.map(q => ids.push(ObjectID(q._id)));
+    similarQuestions = await req.db.collection('QuestionPublic').find({_id : { "$in": ids}}).toArray();
+    response.similarQuestions = similarQuestions;
     res.json(response);
 });
 
