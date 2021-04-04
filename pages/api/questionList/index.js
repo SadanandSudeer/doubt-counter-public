@@ -1,6 +1,7 @@
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
 import cors from "cors";
+import {normalizeQuestion } from '../../utils';
 
 import middleware from '../database';
 const handlerQ = nextConnect();
@@ -15,11 +16,8 @@ handlerQ.post(async (req, res) => {
     searchReq.hasTopics = searchReq.Topics.length > 0
     searchReq.hasExams = searchReq.Exams.length > 0
     searchReq.hasPriorExams = searchReq.PriorExams.length > 0
-    console.info("Request", searchReq);
 
     let basePipeline = [];
-    let searchPipeline = [];
-    let countPipeline = [];
 
     if (searchReq.hasSearchText){
         basePipeline.push(
@@ -138,18 +136,15 @@ handlerQ.post(async (req, res) => {
     basePipeline.push({"$sort": {"score": -1}});
     basePipeline.push({"$skip": searchReq.skip})
     basePipeline.push({"$limit": searchReq.limit});
-    console.info("basePipeline-1", JSON.stringify(basePipeline));
 
     let questionIds = await req.db.collection('Question').aggregate(basePipeline).toArray();
-    console.info(questionIds)
-
-    let count = await req.db.collection('Question').aggregate(countPipeline).toArray();
 
     let ids = [];
     questionIds.map(q => ids.push(ObjectID(q._id)));
 
     let files = await req.db.collection("Question").find({"_id": { $in: ids}}).toArray();
-
+    let questions = [];
+    files.map(f => questions.push(normalizeQuestion(f)));
     res.json(files);
 });
 export default handlerQ;
