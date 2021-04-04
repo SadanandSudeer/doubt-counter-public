@@ -1,0 +1,150 @@
+.content{
+  max-width: 100%;
+}
+
+.contentSingleColumn{
+  max-width: 100%;
+}
+
+.contentSingleColumn .card {
+  min-width: 90%;
+  background-color: aquamarine;
+}
+
+.contentSingleColumn .opt{
+  margin: 0.3rem;
+  flex-basis: 47%;
+  display: flex;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  background-color: khaki;
+  word-wrap: break-word;
+}
+
+
+.grid {
+  display: -webkit-box;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 99%;
+  margin-top: 1rem;
+  vertical-align: top;
+}
+
+.card {
+  margin: 1rem;
+  flex-basis: 30%;
+  min-width: 465px;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  background-color: bisque;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+
+.card h1 {
+  display: inline;
+  margin: 0 0 1rem 0;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.card h2 {
+  display: inline;
+  margin: 0 0 1rem 0;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.logo {
+  height: 1em;
+}
+
+.moreButton {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  font-size: x-large;
+}
+
+.opt{
+  margin: 0.3rem;
+  flex-basis: 47%;
+  display: flex;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  background-color:lightcoral;
+  word-wrap: break-word;
+}
+
+.optData{
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.optData *{
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.optBullet{
+  text-align: left;
+  margin-right: 5px;
+  padding-right: 5px;
+  margin-top: 0.5rem;
+}
+
+.questionOptions{
+  display: -webkit-box;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin-top: 3rem;
+  vertical-align: top;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}

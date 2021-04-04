@@ -1,0 +1,13 @@
+
+> doubtcounter-public@0.1.0 build
+> next build
+
+info  - Loaded env from C:\sadanand\reactjs\doubtcounter-public\.env.local
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Collecting page data...
+info  - Generating static pages (0/14214)
+info  - Generating static pages (3553/14214)
+info  - Generating static pages (7106/14214)
+info  - Generating static pages (10660/14214)
+info  - Generating static pages (14214/14214)

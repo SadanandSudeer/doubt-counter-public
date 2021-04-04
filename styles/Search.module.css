@@ -1,0 +1,22 @@
+  .grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    margin-top: 3rem;
+    font-size: 1.25em;
+  }
+
+  .grid input{
+    min-width: 320px;
+    border-radius: 5px;
+    margin: 5PX;
+    font-size: 1.25em;
+  }
+
+  .grid button{
+    max-width: 48px;
+    border-radius: 5px;
+    font-size: 1.25em;
+  }

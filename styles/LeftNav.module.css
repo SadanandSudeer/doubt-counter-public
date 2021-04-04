@@ -1,0 +1,101 @@
+/* The sidebar menu */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 48.1818px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  }
+  
+  /* The sidebar links */
+  .sidebar a {
+    padding: 8px 8px 8px 49px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .sidebar .menuHead .head {
+    padding: 8px 8px 8px 49px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    background-color: #fff;
+    border-color: #000;
+    border-width: 2px;
+    border-style: solid;
+    min-width: 170px;
+
+  }
+
+  .sidebar .menuHead .toggle {
+    padding: 8px 8px 8px 8px;
+    margin: 2px 4px 2px 4px;
+    background-color: #fff;
+    max-width: 40px;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidebar .menuHead{
+      display: inline-flex;
+  }
+  .sidebar .menuHead .spacer{
+    min-width:48px;
+    max-width: 48px;
+  }
+
+  /* Position and style the close button (top right corner) */
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* The button used to open the sidebar */
+  .openbtn {
+    position: absolute;
+    top: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 20px 15px;
+    border: none;
+    height: 45px;
+  }
+  
+  .openbtn:hover {
+    background-color: #111;
+  }
+
+  .openbtn:focus {
+    background-color: #111;
+    outline-color: #111;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }

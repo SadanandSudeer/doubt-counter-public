@@ -1,0 +1,23 @@
+{
+  "name": "doubtcounter-public",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "build-export": "next build && next export",
+    "start": "next start"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "jquery": "^3.6.0",
+    "jsdom": "^16.5.2",
+    "mongodb": "^3.6.5",
+    "next": "10.0.9",
+    "next-connect": "^0.10.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-infinite-scroll-hook": "^3.0.0"
+  }
+}
