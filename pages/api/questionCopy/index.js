@@ -11,21 +11,28 @@ handlerCopy.get(async (req, res) => {
         [
             {"$project":{ "_id": "$_id" }}
         ]).toArray();
-    questionIds.map(async (q) => {
-        console.info("processing", q._id);
-        let question = await req.db.collection('QuestionPublic').find({"_id": ObjectID(q._id)}).toArray();
-        if (isNull(question) || question.length === 0){
-            console.info("Info not found in new table for ", q._id);
-            let question = await req.db.collection('Question').find({"_id": ObjectID(q._id)}).toArray();
-            question.map(async (q1) => {
-                let nQ = normalizeQuestion(q1);
-                console.info("Normalized ", q1._id);
-                await req.db.collection('QuestionPublic').updateOne({"_id": ObjectID(q1._id)}, [ { "$set": nQ}],  {
-                    upsert: true
-                  });
-            });
-        }        
+    let ids = []
+    questionIds.map( (q) => {
+        ids.push(ObjectID(q._id));
     });
+
+    let questions = await req.db.collection('Question').aggregate(
+        [
+            {
+                '$match': {
+                    '_id': {
+                        '$in': ids
+                    }
+                }
+            }
+        ]).toArray();
+    
+    let qList = [];
+    for(let i = 0; i < questions.length; i++){
+        console.info("insert row", i, questions[i]._id);
+        await req.db.collection('QuestionPublic').insertOne(normalizeQuestion(questions[i]));
+    }
+
     res.json("Ok");
 });
 
