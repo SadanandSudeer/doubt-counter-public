@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 import QuestionList from '../components/QuestionList';
-
+import subjectStyles from '../styles/Subject.module.css';
 import Head from 'next/head';
-export default function Home({articles}) {
-  const [windowWidth, setWindowWidth] = useState();
-  const [windowHeight, setWindowHeight] = useState();
-  useEffect(async () => {
-      debugger;   
-      setWindowHeight(window.innerHeight);
-      setWindowWidth(window.innerWidth);
-  }, []);
-  useEffect(async () => {
-    debugger;
-    document.getElementById("layoutContent").style.maxHeight = windowHeight;
-    document.getElementById("layoutContent").style.maxWidth = windowWidth;
-  }, [windowWidth, windowHeight])
 
-  useEffect(async () => {
-    document.getElementById("__next").style.marginLeft = "5px";
-  }, [])
+export default function Home({articles}) {
+
+  // const [windowWidth, setWindowWidth] = useState();
+  // const [windowHeight, setWindowHeight] = useState();
+  // useEffect(async () => {
+  //     setWindowHeight(window.innerHeight);
+  //     setWindowWidth(window.innerWidth);
+  // }, []);
+  // useEffect(async () => {
+  //   document.getElementById("layoutContent").style.maxHeight = windowHeight;
+  //   document.getElementById("layoutContent").style.maxWidth = windowWidth;
+  // }, [windowWidth, windowHeight])
+
+  // useEffect(async () => {
+  //   document.getElementById("__next").style.marginLeft = "5px";
+  // }, [])
 
   return (
       <>
@@ -28,7 +28,11 @@ export default function Home({articles}) {
         </Head>
         <h3>Recently Added</h3>
         <img src="/assets/images/DocImages/UnD-SET.doc_files/image140.png" />
-        <QuestionList questions={articles} isLeaf={false} />
+        <div className={subjectStyles.content}>
+          <div className={subjectStyles.questionList}>
+            <QuestionList questions={articles} isLeaf={false} />
+          </div>
+        </div>
       </>
   );
 }

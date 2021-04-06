@@ -18,23 +18,30 @@ if (!MONGODB_DB) {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
- let cached = global.mongo
+//  let cached = global.mongo
 
- if (!cached) {
-   cached = global.mongo = { conn: null, promise: null }
- }
+//  if (!cached) {
+//    cached = global.mongo = { conn: null, promise: null }
+//  }
 
- //'mongodb://admin:admin@localhost:27017/?authSource=admin&readPreference=primary&ssl=false'
-const client = new MongoClient(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+//  //'mongodb://admin:admin@localhost:27017/?authSource=admin&readPreference=primary&ssl=false'
+// const client = new MongoClient(MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+global.mongo = global.mongo || {};
 
-//'DoubtCounter'
+
 async function database(req, res, next) {
-  if (!client.isConnected()) await client.connect();
-  req.dbClient = client;
-  req.db = client.db(MONGODB_DB);
+  if (!global.mongo.client) {
+    global.mongo.client = new MongoClient(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    await global.mongo.client.connect();
+  }
+  req.dbClient = global.mongo.client;
+  req.db = global.mongo.client.db(process.env.MONGODB_DB);
   return next();
 }
 
