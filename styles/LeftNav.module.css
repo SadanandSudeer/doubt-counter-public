@@ -13,10 +13,9 @@
   }
   
   /* The sidebar links */
-  .sidebar a {
-    padding: 8px 8px 8px 49px;
+  .sidebar .menuHead {
+    padding: 8px 8px 8px 4px;
     text-decoration: none;
-    font-size: 15px;
     color: #818181;
     display: block;
     transition: 0.3s;
@@ -25,7 +24,6 @@
   .sidebar .menuHead .head {
     padding: 8px 8px 8px 49px;
     text-decoration: none;
-    font-size: 15px;
     color: #818181;
     display: block;
     transition: 0.3s;
@@ -42,11 +40,20 @@
     margin: 2px 4px 2px 4px;
     background-color: #fff;
     max-width: 40px;
+    max-height: 40px;
   }
   
   /* When you mouse over the navigation links, change their color */
   .sidebar a:hover {
     color: #f1f1f1;
+  }
+
+  .sidebar a {
+    padding: 8px 8px 8px 55px;
+    text-decoration: none;
+    color: lightgray;
+    display: block;
+    transition: 0.3s;
   }
 
   .sidebar .menuHead{
@@ -60,17 +67,18 @@
   /* Position and style the close button (top right corner) */
   .sidebar .closebtn {
     position: absolute;
-    top: 0;
+    top: 8px;
     right: 10px;
-    font-size: 36px;
     margin-left: 50px;
+    color: #FFF;
+    font-size: xx-large;
   }
   
   /* The button used to open the sidebar */
   .openbtn {
+    font-size: x-large;
     position: absolute;
     top: 0;
-    font-size: 20px;
     cursor: pointer;
     background-color: #111;
     color: white;
@@ -97,5 +105,5 @@
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
   @media screen and (max-height: 450px) {
     .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
+    .sidebar a {font-size: 0.75vw;}
   }

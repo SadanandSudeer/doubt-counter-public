@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import searchStyles from "../styles/Search.module.css";
 
-const Search = ({text, onChange}) => {
+const Search = ({text, label, onChange}) => {
     const [searchText, setSearchText] = useState(text??"");
     const [shouldTrigger, setShouldTrigger] = useState(false);
 
@@ -32,10 +32,16 @@ const Search = ({text, onChange}) => {
     }
 
     return (
+        <div className={searchStyles.main}>
         <div className={searchStyles.grid}>
-            <label htmlFor="Search">Search</label>
-            <input id="searchText" type="text" value={searchText} onChange={onBlur} onKeyUp={onKeyUp}/>
-            <button onClick={submitClick}>Go</button>
+            <div className={searchStyles.cardLabel}>
+               <h3> <label htmlFor="Search">Search {label}</label></h3>
+            </div>
+            <div className={searchStyles.cardInput}>
+                <input id="searchText" type="text" value={searchText} onChange={onBlur} onKeyUp={onKeyUp}/>
+                <button onClick={submitClick}>Search</button>
+            </div>
+        </div>
         </div>
     );
 }

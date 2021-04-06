@@ -1,5 +1,17 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+import nextConnect from 'next-connect';
+export const errorHandler = nextConnect({
+    onNoMatch: (req, res) => res.status(404).send({
+      ok: false,
+      message: `API route not found: ${req.url}`,
+    }),
+    onError: (err, _req, res) => res.status(500).send({
+      ok: false,
+      message: `Unexpected error.`,
+      error: err.toString(),
+    }),
+});
 
 export const isNull = (obj) =>{
     if (!obj || obj === undefined || obj === null){
@@ -7,6 +19,7 @@ export const isNull = (obj) =>{
     }
     return false;
 }
+
 export const normalizeQuestion = (q) => {
     if (isNull(q)){
         q = [];
@@ -80,7 +93,6 @@ export const getCleanHTML_Old = (doc) => {
 }
 
 const getCleanHTML = (doc) => {
-    debugger;
     const jsdom = require("jsdom");
     let dom = new JSDOM(doc)
     const $ = require('jquery')(dom.window);

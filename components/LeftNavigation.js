@@ -16,9 +16,9 @@ const LeftNavigation = ({data, onSelect}) => {
     /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
     function openNav(e) {
         setMenuOpen(true);
-        document.getElementById("mySidebar").style.width = "280px";
+        document.getElementById("mySidebar").style.width = "350px";
         //document.getElementById("main").style.marginLeft = "250px";
-        document.getElementById("__next").style.marginLeft = "280px";
+        document.getElementById("__next").style.marginLeft = "350px";
     }
   
     function closeNav(e) {
@@ -37,6 +37,11 @@ const LeftNavigation = ({data, onSelect}) => {
         }
     };
 
+    const itemSelection = (subject, cat, item, count) => {
+        onSelect(subject, cat, item, count);
+        closeNav({});
+    }
+
     /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
     return (
         <>
@@ -44,11 +49,11 @@ const LeftNavigation = ({data, onSelect}) => {
                 <button className={leftNavStyles.openbtn} onClick={openNav}>&#9776; <div style={{display : isMenuOpen?"contents":"none"}}>Open Sidebar</div></button>
                 <a className={leftNavStyles.closebtn} onClick={closeNav}  style={{display : isMenuOpen?"block":"none"}}>&times;</a>
 
-                {renderLeftNave(data, onSelect, "Chapters")}
-                {renderLeftNave(data, onSelect, "Concepts")}
-                {renderLeftNave(data, onSelect, "Topics")}
-                {renderLeftNave(data, onSelect, "Exams")}
-                {renderLeftNave(data, onSelect, "PriorExams")}
+                {renderLeftNave(data, itemSelection, "Chapters")}
+                {renderLeftNave(data, itemSelection, "Concepts")}
+                {renderLeftNave(data, itemSelection, "Topics")}
+                {renderLeftNave(data, itemSelection, "Exams")}
+                {renderLeftNave(data, itemSelection, "PriorExams")}
             </div>
         </>
     );

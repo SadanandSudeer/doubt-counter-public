@@ -26,11 +26,42 @@ handlerCopy.get(async (req, res) => {
                 }
             }
         ]).toArray();
-    
+    let questionsP = await req.db.collection('QuestionPublic').aggregate(
+        [
+            {
+                '$match': {
+                    '_id': {
+                        '$in': ids
+                    }
+                }
+            },
+            {
+                '$project': {
+                    "_id": 1
+                }
+            }
+        ]).toArray();
+        
+    let excludeIds = [];
+    questionsP.map((qp)=> excludeIds.push(qp._id.toString()));
     let qList = [];
+    console.info(excludeIds);
     for(let i = 0; i < questions.length; i++){
+        console.info("Processed", excludeIds.indexOf(questions[i]._id.toString()))
+        if (excludeIds.indexOf(questions[i]._id.toString()) !== -1){
+            console.info("Skip row", i, questions[i]._id);
+            continue;        
+        }
         console.info("insert row", i, questions[i]._id);
-        await req.db.collection('QuestionPublic').insertOne(normalizeQuestion(questions[i]));
+        qList.push(normalizeQuestion(questions[i]));
+        if (qList.length === 30){
+            await req.db.collection('QuestionPublic').insertMany(qList);
+            qList=[];
+        }
+    }
+    if (qList.length > 0){
+        await req.db.collection('QuestionPublic').insertMany(qList);
+        qList=[];
     }
 
     res.json("Ok");

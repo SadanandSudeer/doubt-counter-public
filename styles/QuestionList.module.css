@@ -27,35 +27,8 @@
   border-color: #0070f3;
 }
 
-.card h3 {
-  display: inline !important;
-  word-wrap: break-word;
-  text-overflow: ellipsis;
-  margin: 0 0 1rem 0 !important;
-  font-size: 0.8rem !important;
-  font-weight: normal !important;;
-}
-.card h1 {
-  display: inline !important;
-  word-wrap: break-word;
-  text-overflow: ellipsis;
-  margin: 0 0 1rem 0 !important;
-  font-size: 0.8rem !important;
-  font-weight: normal !important;;
-}
-  
-.card h3 {
-  display: inline !important;
-  word-wrap: break-word;
-  text-overflow: ellipsis;
-  margin: 0 0 1rem 0 !important;
-  font-size: 0.8rem !important;
-  font-weight: normal !important;;
-}
-
 .card p {
   margin: 0;
-  font-size: 1.25rem;
   line-height: 1.5;
 }
 

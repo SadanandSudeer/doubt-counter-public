@@ -11,7 +11,7 @@ const Nav = () => {
     }, [subjects])
 
     return (
-        <div className={navStyles.nav}>
+        <div id="navBar" className={navStyles.nav}>
             <ul>
                 <li>
                     <Link href="/">Home</Link>

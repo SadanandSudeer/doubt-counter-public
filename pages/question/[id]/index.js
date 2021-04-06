@@ -17,9 +17,9 @@ export default function question({question}){
                 <QuestionList questions={selectedQuestion} isLeaf={true}/>
             </div>
             <h3>Similar Questions</h3>
-            <p className={qiStyle.content}>
+            <div className={qiStyle.content}>
                 <QuestionList questions={question.similarQuestions} isLeaf={false}/>
-            </p>
+            </div>
         </>
     );
 }

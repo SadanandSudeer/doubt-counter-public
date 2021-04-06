@@ -1,31 +1,29 @@
-.main {
-  width: 100px;
-}
-.content{
-  max-width: 100%;
-}
-.content h1{
-  text-align:center;
-}
+  .main {
+    width: 100px;
+  }
+  .content{
+    max-width: "~calc(100% - 48px)";
+  }
+  .content h1{
+    text-align:center;
+  }
 
-.grid {
+  .grid {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     max-width: 95%;
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 
-.questionList{
-  width: 100%;
-  min-height: 100vh;
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
+  .questionList{
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+  }
   
   .card {
     margin: 1rem;
@@ -48,12 +46,10 @@
   
   .card h3 {
     margin: 0 0 1rem 0;
-    font-size: 1.5rem;
   }
   
   .card p {
     margin: 0;
-    font-size: 1.25rem;
     line-height: 1.5;
   }
   

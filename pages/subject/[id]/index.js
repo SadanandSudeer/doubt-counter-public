@@ -9,7 +9,6 @@ import QuestionList from '../../../components/QuestionList';
 
 import leftNavStyles from '../../../styles/LeftNav.module.css';
 import subjectStyles from '../../../styles/Subject.module.css';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 export default function subject({subject}){
     const [sub, setSubject] = useState(subject);
@@ -39,7 +38,6 @@ export default function subject({subject}){
             },
             body: JSON.stringify(req)
         });
-        debugger;
         const questions = await res.json();
         //var qList = [...(questions.items)];
         setQuestionList(questions);
@@ -47,7 +45,6 @@ export default function subject({subject}){
     }, [filters, searchText])
 
     const handleLoadMore = () => {
-        debugger;
         setLoading(true);
         // Some API call to fetch the next page
         var req = {subject: sub.Name, SearchText: searchText,  Chapters:[], Concepts:[], Topics:[], Exams:[], PriorExams:[], skip:questionList.length, limit: 11};
@@ -94,7 +91,6 @@ export default function subject({subject}){
     }
 
     const removeFilter = (f) =>{
-        debugger;
         let reduced = [];
         filters.map(fi => {
             if (fi.subject !== f.subject
@@ -121,9 +117,7 @@ export default function subject({subject}){
                     <LeftNavigation data={subject} onSelect={onSelect}/>
                 </div>
                 <div className={subjectStyles.content}>
-                    <h1>{subject.Name}</h1>
-                    <p>{subject.Description}</p>
-                    <Search searchText={searchText} onChange={searchTextChanged}/>
+                    <Search searchText={searchText} label={subject.Name} onChange={searchTextChanged}/>
                     <Filters filters={filters} onRemove={removeFilter}/>
                     <div className={subjectStyles.questionList}>
                         <QuestionList questions={questionList} isLeaf={false} handleMore={handleLoadMore} hasMore={hasNextPage}/>

@@ -1,9 +1,11 @@
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
 import middleware from '../../database';
-import { getSearchText } from '../../utils';
+import { errorHandler, getSearchText } from '../../utils';
+
 const handler = nextConnect();
 handler.use(middleware);
+handler.use(errorHandler);
 handler.get(async (req, res) => {
     let doc = await req.db.collection('QuestionPublic').find({"_id": ObjectID(req.query.id)}).toArray();
     let response = {question: doc[0], similarQuestions:[]};

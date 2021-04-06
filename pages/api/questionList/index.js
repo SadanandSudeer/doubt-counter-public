@@ -142,7 +142,16 @@ handlerQ.post(async (req, res) => {
     let questionIds = await req.db.collection('Question').aggregate(basePipeline).toArray();
     let ids = [];
     questionIds.map(q => ids.push(ObjectID(q._id)));
-    let files = await req.db.collection("QuestionPublic").find({"_id": { $in: ids}}).toArray();
-    res.json(files);
+    let files = await req.db.collection("QuestionPublic").aggregate([
+        {
+            "$match": {
+                '_id': {
+                    '$in': ids
+                }
+            }
+        }
+    ]).toArray();
+    //let files = await req.db.collection("QuestionPublic").find({"_id": { $in: ids}}).toArray();
+    res.status(200).json(files);
 });
 export default handlerQ;
