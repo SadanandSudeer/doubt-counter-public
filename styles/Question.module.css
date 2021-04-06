@@ -7,23 +7,32 @@
 }
 
 .contentSingleColumn .card {
-  min-width: 90%;
-  background-color: aquamarine;
-}
-
-.contentSingleColumn .opt{
-  margin: 0.3rem;
-  flex-basis: auto;
-  display: flex;
-  padding: 0.5rem;
+  margin: 1rem;
+  min-width: 250px;
+  max-width: 45%;
+  padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  background-color: khaki;
+  background-color: aquamarine;
+}
+
+.contentSingleColumn .opt{
+  margin: 0.3rem;
+  flex-basis: 47%;
+  padding: 5px;
+  display: flex;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
   word-wrap: break-word;
+  background-color: khaki;
 }
 
 
@@ -86,8 +95,8 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  background-color:lightcoral;
   word-wrap: break-word;
+  background-color:lightcoral;
 }
 
 .optData{

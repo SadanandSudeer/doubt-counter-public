@@ -32,7 +32,8 @@
     border-width: 2px;
     border-style: solid;
     min-width: 170px;
-
+    font-size: medium;
+    font-weight: bold;
   }
 
   .sidebar .menuHead .toggle {
@@ -88,12 +89,11 @@
   }
   
   .openbtn:hover {
-    background-color: #111;
+    background-color: #000;
   }
 
   .openbtn:focus {
-    background-color: #111;
-    outline-color: #111;
+    background-color: #000;
   }
   
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
