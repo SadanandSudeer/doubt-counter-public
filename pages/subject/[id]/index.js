@@ -29,6 +29,7 @@ export default function subject({subject}){
             req[f.type].push(f.typeItem);
         });
         const res = await fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
+            timeout = 10000,
             crossDomain:true,
             mode: "cors",
             method: 'POST',
