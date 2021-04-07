@@ -5,7 +5,7 @@ import cors from "cors";
 import middleware from '../database';
 const handlerQ = nextConnect();
 handlerQ.use(middleware);
-//handlerQ.use(cors());
+handlerQ.use(cors());
 handlerQ.post(async (req, res) => {
     if (!req.body){
         return [];

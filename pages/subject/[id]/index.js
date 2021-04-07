@@ -28,30 +28,29 @@ export default function subject({subject}){
         filters.map(f => {
             req[f.type].push(f.typeItem);
         });
-
-        fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
-            crossDomain:true,
+        const axios = require('axios').default;
+        axios({
+            method: 'post',
+            url: `${process.env.NEXT_PUBLIC_API}/questionList`,
+            timeout: 60000,    // 4 seconds timeout
+            data: req,
             mode: "cors",
             method: 'POST',
             headers: {
                 "access-control-allow-origin" : "*",
                 "Content-type": "application/json; charset=UTF-8"
-            },
-            body: JSON.stringify(req)
-        })
-        .then((res)=>{
-            res.json().then((questions)=> {
-                setQuestionList(questions);
-                setHasNextPage(questions.length == 11);    
-            }).catch((error1) => {
-                console.log("Error On retrieving json");
-                console.log(error1);
-            });
-            //var qList = [...(questions.items)];
-        }).catch((error) => {
+            }
+          })
+          .then(res => {
+            console.info(res);
+            let questions = res.data;
+            setQuestionList(questions);
+            setHasNextPage(questions.length == 11);    
+          })
+          .catch(error => {
             console.log("Error On Fetch");
             console.log(error);
-        });
+          })
 
     }, [filters, searchText])
 

@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "jquery": "^3.6.0",
     "jsdom": "^16.5.2",
