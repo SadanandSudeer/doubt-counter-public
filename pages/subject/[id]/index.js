@@ -12,6 +12,8 @@ import subjectStyles from '../../../styles/Subject.module.css';
 import {connection} from '../../../lib/database';
 import {getLeftNav} from '../../../lib/subjectDB';
 
+const axios = require('axios').default;
+
 export default function subject({subject}){
     const [sub, setSubject] = useState(subject);
     const [filters, setFilters] = useState([]);
@@ -30,28 +32,36 @@ export default function subject({subject}){
         filters.map(f => {
             req[f.type].push(f.typeItem);
         });
-        const axios = require('axios').default;
-        axios({
-            method: 'post',
-            url: `${process.env.NEXT_PUBLIC_API}/questionList`,
-            timeout: 60000,    // 4 seconds timeout
-            data: req,
-            mode: "cors",
+        console.log(req);
+        console.log(filters);
+        
+        let axiosOpts = {
             method: 'POST',
+            url: `${process.env.NEXT_PUBLIC_API}/questionList`,
+            data: JSON.stringify(req),
             headers: {
                 "access-control-allow-origin" : "*",
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept":"*/*"
             }
-          })
-          .then(res => {
-            console.info(res);
-            let questions = res.data;
-            setQuestionList(questions);
-            setHasNextPage(questions.length == 11);    
-          })
-          .catch(error => {
-            console.log("Error On Fetch", error);
-          })
+          };
+        console.log("Request Object", axiosOpts);
+        let res = await axios(axiosOpts);
+        let questions = res.data;
+
+        // let res = await fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
+        //     crossDomain:true,
+        //     method: 'POST',
+        //     headers: {
+        //         "access-control-allow-origin" : "*",
+        //         "Content-type": "application/json;"
+        //     },
+        //     body: JSON.stringify(req)
+        // });
+
+        // let questions = await res.json();
+        setQuestionList(questions);
+        setHasNextPage(questions.length == 11);    
 
     }, [filters, searchText])
 

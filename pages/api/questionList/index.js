@@ -7,6 +7,8 @@ const handlerQ = nextConnect();
 handlerQ.use(middleware);
 handlerQ.use(cors());
 handlerQ.post(async (req, res) => {
+    console.log("Request received");
+    console.log(req);
     if (!req.body){
         return [];
     }
