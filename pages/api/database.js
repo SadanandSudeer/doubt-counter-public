@@ -40,6 +40,7 @@ async function database(req, res, next) {
     });
     await global.mongo.client.connect();
   }
+  req.setTimeout(120000);
   req.dbClient = global.mongo.client;
   req.db = global.mongo.client.db(process.env.MONGODB_DB);
   return next();

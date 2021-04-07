@@ -5,15 +5,13 @@ import cors from "cors";
 import middleware from '../database';
 const handlerQ = nextConnect();
 handlerQ.use(middleware);
-handlerQ.use(cors());
+//handlerQ.use(cors());
 handlerQ.post(async (req, res) => {
-    console.info("8");
     if (!req.body){
-        console.info("9");
         return [];
     }
     let searchReq = req.body;
-    
+    console.info("Handling cors request QuestionList", searchReq);
     searchReq.hasSearchText = searchReq.SearchText.length > 0
     searchReq.hasChapters = searchReq.Chapters.length > 0
     searchReq.hasConcepts = searchReq.Concepts.length > 0
@@ -152,6 +150,6 @@ handlerQ.post(async (req, res) => {
         }
     ]).toArray();
     //let files = await req.db.collection("QuestionPublic").find({"_id": { $in: ids}}).toArray();
-    res.status(200).json(files);
+    res.json(files);
 });
 export default handlerQ;

@@ -16,7 +16,7 @@ export default function subject({subject}){
     const [searchText, setSearchText] = useState("");
     const [questionList, setQuestionList] =  useState([]);
     const [hasNextPage, setHasNextPage] = useState();
-    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(async () => {
         if (filters.length === 0 && searchText.length === 0){
@@ -28,8 +28,8 @@ export default function subject({subject}){
         filters.map(f => {
             req[f.type].push(f.typeItem);
         });
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
-            timeout = 10000,
+
+        fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
             crossDomain:true,
             mode: "cors",
             method: 'POST',
@@ -38,11 +38,21 @@ export default function subject({subject}){
                 "Content-type": "application/json; charset=UTF-8"
             },
             body: JSON.stringify(req)
+        })
+        .then((res)=>{
+            res.json().then((questions)=> {
+                setQuestionList(questions);
+                setHasNextPage(questions.length == 11);    
+            }).catch((error1) => {
+                console.log("Error On retrieving json");
+                console.log(error1);
+            });
+            //var qList = [...(questions.items)];
+        }).catch((error) => {
+            console.log("Error On Fetch");
+            console.log(error);
         });
-        const questions = await res.json();
-        //var qList = [...(questions.items)];
-        setQuestionList(questions);
-        setHasNextPage(questions.length == 11);
+
     }, [filters, searchText])
 
     const handleLoadMore = () => {
@@ -125,6 +135,7 @@ export default function subject({subject}){
                     </div>
                 </div>
             </div>
+            <div>{error}</div>
         </>
     );
 }
