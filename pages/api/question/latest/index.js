@@ -1,7 +1,7 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 import nextConnect from 'next-connect';
-import middleware from '../../database';
+import middleware from '../../../../lib/database';
 const handlerQ = nextConnect();
 handlerQ.use(middleware);
 handlerQ.get(async (req, res) => {

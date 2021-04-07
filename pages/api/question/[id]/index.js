@@ -1,6 +1,6 @@
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
-import middleware from '../../database';
+import middleware from '../../../../lib/database';
 import { errorHandler, getSearchText } from '../../utils';
 
 const handler = nextConnect();

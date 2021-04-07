@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import QuestionList from "../../../components/QuestionList";
 import {server} from '../../../config';
 import qiStyle from '../../../styles/Question.module.css';
+import {getQuestionById, getQuestionIds} from '../../../lib/questionDB';
+import {connection} from '../../../lib/database';
+
 export default function question({question}){
     useEffect(async () => {
         document.getElementById("__next").style.marginLeft = "5px";
@@ -25,13 +28,10 @@ export default function question({question}){
 }
 
 export const getStaticProps = async(context) => {
-    let url = `${process.env.NEXT_PUBLIC_API}/question/${context.params.id}`
-    const res = await fetch(url, {
-        crossDomain:true,
-        method: 'GET',
-        headers: {'Content-Type':'application/json'}
-    });
-    const question = await res.json();
+    let conn = await connection();
+    let question = await getQuestionById(conn, context.params.id);
+
+    question = JSON.parse(JSON.stringify(question));
     return {
         props: {
             question
@@ -40,16 +40,10 @@ export const getStaticProps = async(context) => {
 }
 
 export const getStaticPaths = async () => {
-    let url = `${process.env.NEXT_PUBLIC_API}/question/`
-    const res = await fetch(url, {
-        crossDomain:true,
-        method: 'GET',
-        headers: {'Content-Type':'application/json'}
-    });
-    const articles = await res.json();
-    //const ids = articles.map((a) => (a));
-    
-    const paths = articles.map((aid) => ({params:{id: ''+ aid}}));
+    let conn = await connection();
+    let qIds = await getQuestionIds(conn);
+
+    const paths = qIds.map((aid) => ({params:{id: ''+ aid}}));
     return {
         paths,
         fallback:false

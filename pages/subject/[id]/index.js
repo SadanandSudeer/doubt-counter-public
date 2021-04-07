@@ -9,6 +9,8 @@ import QuestionList from '../../../components/QuestionList';
 
 import leftNavStyles from '../../../styles/LeftNav.module.css';
 import subjectStyles from '../../../styles/Subject.module.css';
+import {connection} from '../../../lib/database';
+import {getLeftNav} from '../../../lib/subjectDB';
 
 export default function subject({subject}){
     const [sub, setSubject] = useState(subject);
@@ -48,8 +50,7 @@ export default function subject({subject}){
             setHasNextPage(questions.length == 11);    
           })
           .catch(error => {
-            console.log("Error On Fetch");
-            console.log(error);
+            console.log("Error On Fetch", error);
           })
 
     }, [filters, searchText])
@@ -140,9 +141,9 @@ export default function subject({subject}){
 }
 
 export const getStaticProps = async(context) => {
-    let url = `${process.env.NEXT_PUBLIC_API}/subject/${context.params.id}`;
-    const res = await fetch(url);
-    const subject = await res.json();
+    let conn = await connection();
+    let subject = await getLeftNav(conn, context.params.id);
+    subject = JSON.parse(JSON.stringify(subject));
     return {
         props: {
             subject
@@ -151,14 +152,17 @@ export const getStaticProps = async(context) => {
 }
 
 export const getStaticPaths = async () => {
-    let url = `${process.env.NEXT_PUBLIC_API}/subject/`;
-    const res = await fetch(url);
-    const articles = await res.json();
-    const ids = articles.map((a) => (a));
-    
-    const paths = ids.map((aid) => ({params:{id: ''+ aid}}));
+    let conn = await connection();
+    let doc = await conn.db.collection('BookDb').distinct('subject');
+    let doc1 = await conn.db.collection('InstituteDb').distinct('subject');
+    let array3 = doc.concat(doc1);
+    doc = array3.filter((item,index)=>{
+        return (array3.indexOf(item) == index)
+    })
+    const paths = doc.map((aid) => ({params:{id: ''+ aid}}));
+    //res.json(doc);
     return {
         paths,
         fallback:false
-    }
+    } 
 }

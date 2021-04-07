@@ -1,8 +1,8 @@
 import {normalizeQuestion, isNull } from '../utils';
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
-import middleware from '../database';
-console.log("1")
+import middleware from '../../../lib/database';
+
 const handlerCopy = nextConnect();
 handlerCopy.use(middleware);
 handlerCopy.get(async (req, res) => {

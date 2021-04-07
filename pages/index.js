@@ -1,25 +1,12 @@
 //import { useState, useEffect } from "react";
 import QuestionList from '../components/QuestionList';
 import subjectStyles from '../styles/Subject.module.css';
+import {connection} from '../lib/database';
+
 import Head from 'next/head';
 
 export default function Home({articles}) {
-
-  // const [windowWidth, setWindowWidth] = useState();
-  // const [windowHeight, setWindowHeight] = useState();
-  // useEffect(async () => {
-  //     setWindowHeight(window.innerHeight);
-  //     setWindowWidth(window.innerWidth);
-  // }, []);
-  // useEffect(async () => {
-  //   document.getElementById("layoutContent").style.maxHeight = windowHeight;
-  //   document.getElementById("layoutContent").style.maxWidth = windowWidth;
-  // }, [windowWidth, windowHeight])
-
-  // useEffect(async () => {
-  //   document.getElementById("__next").style.marginLeft = "5px";
-  // }, [])
-
+  
   return (
       <>
         <Head>
@@ -38,13 +25,22 @@ export default function Home({articles}) {
 }
 
 export const getStaticProps = async () => {
-  let url = `${process.env.NEXT_PUBLIC_API}/question/latest`
-  const res = await fetch(url);
-  const articles = await res.json();
-
-  return ({
+  try{
+    let conn = await connection();
+    let doc = await conn.db.collection('QuestionPublic').find({}).sort({'TimeStamp': -1}).limit(11).toArray();
+    let out = JSON.parse(JSON.stringify(doc));
+    return ({
       props: {
-          articles
+        articles: out
       }
-  });
+    });
+  }
+  catch(error){
+    console.log(error);
+    return ({
+      props: {
+        articles: []
+      }
+    });
+  }
 }

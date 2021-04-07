@@ -2,7 +2,7 @@ import {normalizeQuestion } from '../utils';
 import { ObjectID } from 'bson';
 import nextConnect from 'next-connect';
 import cors from "cors";
-import middleware from '../database';
+import middleware from '../../../lib/database';
 const handlerQ = nextConnect();
 handlerQ.use(middleware);
 handlerQ.use(cors());
