@@ -19,6 +19,7 @@
     "next-connect": "^0.10.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-infinite-scroll-hook": "^3.0.0"
+    "react-infinite-scroll-hook": "^3.0.0",
+    "react-player": "^2.9.0"
   }
 }

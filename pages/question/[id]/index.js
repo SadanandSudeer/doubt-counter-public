@@ -10,14 +10,16 @@ export default function question({question}){
         document.getElementById("__next").style.marginLeft = "5px";
     }, [])
     
-
-    let selectedQuestion = [];
-    selectedQuestion.push(question.question);
+    const getSelectedQuestion = (q) =>{
+        let selectedQuestion = [];
+        selectedQuestion.push(q.question);
+        return selectedQuestion
+    }
 
     return (
         <>
-            <div id="showQDetails" className={qiStyle.contentSingleColumn}>
-                <QuestionList questions={selectedQuestion} isLeaf={true}/>
+            <div id="showQDetails" className={qiStyle.content}>
+                <QuestionList questions={getSelectedQuestion(question)} isLeaf={true}/>
             </div>
             <h3>Similar Questions</h3>
             <div className={qiStyle.content}>

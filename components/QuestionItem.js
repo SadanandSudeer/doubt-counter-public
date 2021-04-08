@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import ReactPlayer from 'react-player'
 import Link from 'next/link'
 import qStyles from "../styles/Question.module.css";
 
@@ -13,6 +13,15 @@ const QuestionItem = ({question, isLeaf}) => {
             return x
         }
         else return x[attr];
+    }
+
+    const getPlayer = (videoURL) => {
+        if (isNull(videoURL) || videoURL === ""){
+            return(<></>);
+        }
+        else{
+            return(<div style={{textAlign: "-moz-center"}}><ReactPlayer url={videoURL} width="90%" height="60%"/></div>);
+        }
     }
   
     const buildPreviousYear = (item) => {
@@ -63,9 +72,10 @@ const QuestionItem = ({question, isLeaf}) => {
 
     if (isLeaf){
         return(
-            <div key={"QItem" + question._id} className={qStyles.card}>
+            <div key={"QItem" + question._id} className={qStyles.selectedCard}>
                     {getHtml(question, "questionText", "Question")}
                     <div className={qStyles.questionOptions}>{buildQOptions(question.options, question._id)}</div>
+                    {getPlayer(question.solutionVideoPath)}
                     {getHtml(question, "answerText", "Answer")}
                     {getHtml(question, "solutionText", "Solution")}
             </div>
@@ -80,6 +90,7 @@ const QuestionItem = ({question, isLeaf}) => {
                     <a>
                         {getHtml(question, "questionText", "Question")}
                         <div className={qStyles.questionOptions}>{buildQOptions(question.options, question._id)}</div>
+                        {getPlayer(question.solutionVideoPath)}
                         {getHtml(question, "answerText", "Answer")}
                         {getHtml(question, "solutionText", "Solution")}
                     </a>
