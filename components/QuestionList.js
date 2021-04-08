@@ -13,7 +13,7 @@ const QuestionList = ({questions, isLeaf, handleMore, hasMore}) => {
     return(
         <div className={articleStyles.grid}>
             {questions.map((a) => (<QuestionItem key={'qList' + a._id} question={a} isLeaf={isLeaf}/>))}
-            {getMoreButton(hasMore)};
+            {getMoreButton(hasMore)}
         </div>
     );
 }
