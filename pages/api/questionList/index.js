@@ -7,13 +7,10 @@ const handlerQ = nextConnect();
 handlerQ.use(middleware);
 handlerQ.use(cors());
 handlerQ.post(async (req, res) => {
-    console.log("Request received");
-    console.log(req);
     if (!req.body){
         return [];
     }
     let searchReq = req.body;
-    console.info("Handling cors request QuestionList", searchReq);
     searchReq.hasSearchText = searchReq.SearchText.length > 0
     searchReq.hasChapters = searchReq.Chapters.length > 0
     searchReq.hasConcepts = searchReq.Concepts.length > 0

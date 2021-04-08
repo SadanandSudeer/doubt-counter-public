@@ -11,6 +11,7 @@ import leftNavStyles from '../../../styles/LeftNav.module.css';
 import subjectStyles from '../../../styles/Subject.module.css';
 import {connection} from '../../../lib/database';
 import {getLeftNav} from '../../../lib/subjectDB';
+import {getApiURL} from '../../../lib/config';
 
 const axios = require('axios').default;
 
@@ -32,12 +33,10 @@ export default function subject({subject}){
         filters.map(f => {
             req[f.type].push(f.typeItem);
         });
-        console.log(req);
-        console.log(filters);
         
         let axiosOpts = {
             method: 'POST',
-            url: `${process.env.NEXT_PUBLIC_API}/questionList`,
+            url: `${getApiURL()}/questionList`,
             data: JSON.stringify(req),
             headers: {
                 "access-control-allow-origin" : "*",
@@ -45,21 +44,9 @@ export default function subject({subject}){
                 "Accept":"*/*"
             }
           };
-        console.log("Request Object", axiosOpts);
         let res = await axios(axiosOpts);
         let questions = res.data;
 
-        // let res = await fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
-        //     crossDomain:true,
-        //     method: 'POST',
-        //     headers: {
-        //         "access-control-allow-origin" : "*",
-        //         "Content-type": "application/json;"
-        //     },
-        //     body: JSON.stringify(req)
-        // });
-
-        // let questions = await res.json();
         setQuestionList(questions);
         setHasNextPage(questions.length == 11);    
 
@@ -72,7 +59,7 @@ export default function subject({subject}){
         filters.map(f => {
             req[f.type].push(f.typeItem);
         });
-        fetch(`${process.env.NEXT_PUBLIC_API}/questionList`, {
+        fetch(`${getApiURL()}/questionList`, {
             crossDomain:true,
             mode: "cors",
             method: 'POST',
