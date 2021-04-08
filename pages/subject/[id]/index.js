@@ -53,7 +53,6 @@ export default function subject({subject}){
     }, [filters, searchText])
 
     const handleLoadMore = () => {
-        setLoading(true);
         // Some API call to fetch the next page
         var req = {subject: sub.Name, SearchText: searchText,  Chapters:[], Concepts:[], Topics:[], Exams:[], PriorExams:[], skip:questionList.length, limit: 11};
         filters.map(f => {
@@ -71,7 +70,6 @@ export default function subject({subject}){
         }).then((res)=> {
             res.json().then((questions) => {
                 setHasNextPage(questions.length == 11);
-                setLoading(false);
                 var qList = [...questionList];
                 questions.map(q => qList.push(q));
                 setQuestionList(qList);    
