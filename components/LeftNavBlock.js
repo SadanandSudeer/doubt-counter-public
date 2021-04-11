@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
 import leftNavStyles from '../styles/LeftNav.module.css';
 const LeftNavBlock = (props) => {
     const buildChapterLink = (propId, propItem) =>{
