@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Head from 'next/head';
-import Link from 'next/link';
 import Filters from '../../../components/Filters';
 import Search from '../../../components/Search';
 
@@ -12,8 +11,6 @@ import subjectStyles from '../../../styles/Subject.module.css';
 import {connection} from '../../../lib/database';
 import {getLeftNav} from '../../../lib/subjectDB';
 import {getApiURL} from '../../../lib/config';
-
-const axios = require('axios').default;
 
 export default function subject({subject}){
     const [sub, setSubject] = useState(subject);
@@ -34,22 +31,21 @@ export default function subject({subject}){
             req[f.type].push(f.typeItem);
         });
         
-        let axiosOpts = {
+        fetch(`${getApiURL()}/questionList`, {
+            crossDomain:true,
+            mode: "CORS",
             method: 'POST',
-            url: `${getApiURL()}/questionList`,
-            data: JSON.stringify(req),
             headers: {
                 "access-control-allow-origin" : "*",
-                "Content-type": "application/json; charset=UTF-8",
-                "Accept":"*/*"
-            }
-          };
-        let res = await axios(axiosOpts);
-        let questions = res.data;
-
-        setQuestionList(questions);
-        setHasNextPage(questions.length == 11);    
-
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(req)
+        }).then((res)=>{
+            res.json().then((questions)=>{
+                setQuestionList(questions);
+                setHasNextPage(questions.length == 11);            
+            });
+        });
     }, [filters, searchText])
 
     const handleLoadMore = () => {
@@ -60,7 +56,7 @@ export default function subject({subject}){
         });
         fetch(`${getApiURL()}/questionList`, {
             crossDomain:true,
-            mode: "cors",
+            mode: "CORS",
             method: 'POST',
             headers: {
                 "access-control-allow-origin" : "*",
