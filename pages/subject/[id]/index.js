@@ -21,7 +21,7 @@ export default function subject({subject}){
     const [error, setError] = useState("");
 
     useEffect(async () => {
-        if (filters.length === 0 && searchText.length === 0){
+        if (filters.length === 0 && searchText.length < 3){
             setQuestionList([]);
             setHasNextPage(false);
             return;
@@ -33,7 +33,6 @@ export default function subject({subject}){
         
         fetch(`${getApiURL()}/questionList`, {
             crossDomain:true,
-            mode: "CORS",
             method: 'POST',
             headers: {
                 "access-control-allow-origin" : "*",
@@ -56,7 +55,6 @@ export default function subject({subject}){
         });
         fetch(`${getApiURL()}/questionList`, {
             crossDomain:true,
-            mode: "CORS",
             method: 'POST',
             headers: {
                 "access-control-allow-origin" : "*",

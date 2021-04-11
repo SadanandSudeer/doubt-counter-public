@@ -31,22 +31,22 @@ handlerQ.post(async (req, res) => {
     }
     basePipeline.push({
                         "$unwind": {
-                            "path": "$concept._v"
+                            "path": "$concept"
                         }
                     });
     basePipeline.push({
                         "$unwind": {
-                            "path": "$topic._v"
+                            "path": "$topic"
                         }
                     });
     basePipeline.push({
                         "$unwind": {
-                            "path": "$exam._v"
+                            "path": "$exam"
                         }
                     });
     basePipeline.push({
                         "$unwind": {
-                            "path": "$prevExams._v"
+                            "path": "$prevExams"
                         }
                     });
     let projection = {
@@ -54,15 +54,15 @@ handlerQ.post(async (req, res) => {
                         "answerText": "$answerText.html",
                         "solutionText": "$solutionText.html",
                         "chapterName": "$chapterName",
-                        "concept": "$concept._v",
-                        "topic": "$topic._v",
-                        "exam": "$exam._v",
-                        "prevExams": "$prevExams._v",
+                        "concept": "$concept",
+                        "topic": "$topic",
+                        "exam": "$exam",
+                        "prevExams": "$prevExams",
                         "PrevExamFilter": {
                             "$concat": [
-                                "$prevExams._v.label",
+                                "$prevExams.label",
                                 "-",
-                                "$prevExams._v.value"
+                                "$prevExams.value"
                             ]
                         },
                         "score": {"$meta": "textScore"}
@@ -136,6 +136,7 @@ handlerQ.post(async (req, res) => {
     basePipeline.push({"$sort": {"score": -1}});
     basePipeline.push({"$skip": searchReq.skip})
     basePipeline.push({"$limit": searchReq.limit});
+
     let questionIds = await req.db.collection('Question').aggregate(basePipeline).toArray();
     let ids = [];
     questionIds.map(q => ids.push(ObjectID(q._id)));
