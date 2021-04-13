@@ -17,8 +17,15 @@ const Search = ({text, label, onChange}) => {
 
     const onBlur = (e) => {
         let txt = e.currentTarget.value;
+        let shouldTrigger = false;
+        if (txt.length === 0 && searchText.length > 0){
+            shouldTrigger = true;
+        }
         setSearchText(txt);
         setDisabled(txt.length < 3)
+        if (shouldTrigger){
+            setShouldTrigger(true);
+        }
     }
 
     const submitClick = () =>{
@@ -41,8 +48,8 @@ const Search = ({text, label, onChange}) => {
                <span>Type at least 3 letters and then press ENTER key Or Press SEARCH button</span>
             </div>
             <div className={searchStyles.cardInput}>
-                <input id="searchTextField" type="text" value={searchText} onChange={onBlur} onKeyUp={onKeyUp}/>
-                <button onClick={submitClick} disabled={searchDisabled}>Search</button>
+                <textarea rows="6" cols="50" id="searchTextField" type="text" value={searchText} onChange={onBlur} onKeyUp={onKeyUp}/>
+                <button onClick={submitClick} disabled={searchDisabled}><b>Search</b></button>
             </div>
         </div>
         </div>

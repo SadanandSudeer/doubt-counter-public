@@ -18,7 +18,17 @@ handlerQ.post(async (req, res) => {
     searchReq.hasExams = searchReq.Exams.length > 0
     searchReq.hasPriorExams = searchReq.PriorExams.length > 0
     let basePipeline = [];
-
+    if (searchReq.subject !== "All Subjects"){
+        basePipeline.push(
+            {
+                '$match': {
+                    'subject': {
+                        '$eq': searchReq.subject
+                    }
+                }
+            }            
+        );
+    }
     if (searchReq.hasSearchText){
         basePipeline.push(
                 {

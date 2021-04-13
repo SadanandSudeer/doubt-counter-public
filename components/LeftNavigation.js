@@ -30,7 +30,7 @@ const LeftNavigation = ({data, onSelect}) => {
 
     const renderLeftNave = (data, onSelect, prop) => {
         if (data && data[prop] && data[prop].length > 0){
-            return (<div><LeftNavBlock id={prop} label={prop} subject={data.Name} isOpen={prop === openBlock} items={data[prop]} onClick={toggleMenuBlock} onSelect={onSelect}/></div>);
+            return (<div className={leftNavStyles.category}><LeftNavBlock id={prop} label={prop} subject={data.Name} isOpen={prop === openBlock} items={data[prop]} onClick={toggleMenuBlock} onSelect={onSelect}/></div>);
         }
         else{
             return (<></>);

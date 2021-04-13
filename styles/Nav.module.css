@@ -1,6 +1,6 @@
 .nav {
     padding-left: 48px;
-    background: #000;
+    background: #F7931E;
     color: #fff;
     display: flex;
     align-items: center;
@@ -16,17 +16,28 @@
 
 .nav li {
     float: left;
-    margin: 20px 0;
+    margin: 10px 0 0 0;
 }
 
-.nav li a {
+.nav li .selected  {
     margin: 0 2px;
     color:#eee;
     padding: 10px 20px;
     background:#000;
     font-size:16px;
-    font-weight: bold;
-    
+    font-weight: bold;    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.nav li .nonSelected  {
+    margin: 0 2px;
+    color:#eee;
+    padding: 10px 20px;
+    background:#F7931E;
+    font-size:16px;
+    font-weight: bold;    
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;

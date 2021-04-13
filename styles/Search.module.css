@@ -56,11 +56,11 @@
     min-width: 123px;
   }
 
-  .cardInput input {
+  .cardInput textarea {
     justify-content: center;
     text-align: center;
     width: 85%;
-    height: 40px;
+    height: 60px;
     border-radius: 8px;
   }
 

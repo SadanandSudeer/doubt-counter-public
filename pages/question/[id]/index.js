@@ -1,6 +1,8 @@
+import Head from 'next/head';
+
 import { useEffect } from "react";
 import QuestionList from "../../../components/QuestionList";
-import {server} from '../../../config';
+/*import {server} from '../../../config';*/
 import qiStyle from '../../../styles/Question.module.css';
 import {getQuestionById, getQuestionIds} from '../../../lib/questionDB';
 import {connection} from '../../../lib/database';
@@ -18,6 +20,12 @@ export default function question({question}){
 
     return (
         <>
+            <Head>
+                <title>Kota Doubt Counter - {question.subject}</title>
+                <meta name="description" content="Doubt Counter makes learning simple by helping you get over problems you are stuck with. Prepare for JEE Main, NEET, JEE Advanced exams. Its free with no adds so you focus on studies and nothing else!" />
+                <meta name="keywords" content={question.SearchableText}/>
+                <link rel="icon" href="/assets/images/KDC_Logo_3.png"></link>
+            </Head>
             <div id="showQDetails" className={qiStyle.content}>
                 <QuestionList questions={getSelectedQuestion(question)} isLeaf={true}/>
             </div>

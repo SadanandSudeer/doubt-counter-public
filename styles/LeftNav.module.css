@@ -12,8 +12,12 @@
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
   }
   
+  .category{
+    margin-top:20px;
+  }
+
   /* The sidebar links */
-  .sidebar .menuHead {
+  .menuHead {
     padding: 8px 8px 8px 4px;
     text-decoration: none;
     color: #818181;
@@ -21,7 +25,7 @@
     transition: 0.3s;
   }
 
-  .sidebar .menuHead .head {
+  .menuHead .head {
     padding: 8px 8px 8px 49px;
     text-decoration: none;
     color: #818181;
@@ -36,7 +40,7 @@
     font-weight: bold;
   }
 
-  .sidebar .menuHead .toggle {
+  .menuHead .toggle {
     padding: 8px 8px 8px 8px;
     margin: 2px 4px 2px 4px;
     background-color: #fff;

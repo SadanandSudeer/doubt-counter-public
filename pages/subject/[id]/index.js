@@ -110,7 +110,9 @@ export default function subject({subject}){
     return (
         <>
             <Head>
-                <title>{subject.Name}</title>
+                <title>Kota Doubt Counter - {subject.Name}</title>
+                <meta name="description" content="Doubt Counter makes learning simple by helping you get over problems you are stuck with. Prepare for JEE Main, NEET, JEE Advanced exams. Its free with no adds so you focus on studies and nothing else!" />
+                <link rel="icon" href="/assets/images/KDC_Logo_3.png"></link>
             </Head>
             <div id="main" className={subjectStyles.grid}>
                 <div className={leftNavStyles.leftNav} >
@@ -119,8 +121,11 @@ export default function subject({subject}){
                 <div className={subjectStyles.content}>
                     <Search searchText={searchText} label={subject.Name} onChange={searchTextChanged}/>
                     <Filters filters={filters} onRemove={removeFilter}/>
+                    <div style={{width:"99%"}}>
+                    <hr/>
                     <div className={subjectStyles.questionList}>
                         <QuestionList questions={questionList} isLeaf={false} handleMore={handleLoadMore} hasMore={hasNextPage}/>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -149,7 +154,6 @@ export const getStaticPaths = async () => {
         return (array3.indexOf(item) == index)
     })
     const paths = doc.map((aid) => ({params:{id: ''+ aid}}));
-    //res.json(doc);
     return {
         paths,
         fallback:false
