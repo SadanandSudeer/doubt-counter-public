@@ -34,32 +34,38 @@ export default function Home() {
       with correct fundamentals and will serve the Society and Nation well. 
       </p>
       <p>We strongly believe there is <b>No Shortcut to Success!</b></p> 
-      <div style={{display:'flex', width:"100%"}}>
-        <div className={aboutStyles.grid} style={{float:'left'}}>
-          <Image src="/assets/images/RD_Sir.jpg" width="130px"  height="140px"/>
-          <div className={aboutStyles.columnLeft}><h2>Ritesh Dahiya Sir</h2>
-          B. Tech. IIT-Delhi<br/>
-          Experience - 22 years.</div>
+      <div className={aboutStyles.founder}>
+        <div className={aboutStyles.card}><div style={{display: "inline", margin: "0 auto", padding: '3px', fontWeight:'bold', fontSize:"1.5rem"}}>Our Founders</div></div>
+        <div className={aboutStyles.card}>
+          <div className={aboutStyles.grid} style={{float:'left'}}>
+            <Image src="/assets/images/RD_Sir.jpg" width="130px"  height="140px"/>
+            <div className={aboutStyles.columnLeft}><h2>Ritesh Dahiya Sir</h2>
+            B. Tech. IIT-Delhi<br/>
+            Experience - 22 years.</div>
+          </div>
+          <div style={{float:'none', width:'100%'}}>
+          </div>
+          <div className={aboutStyles.grid} style={{float:'right'}}>
+            <Image src="/assets/images/jyoti.png" width="130px"  height="140px"/>
+            <div className={aboutStyles.columnLeft}><h2>Jyoti M Sadanand</h2>
+            Master's of Science (Data Science)<br/>
+            Experience - 23 years.</div>
+          </div>        
         </div>
-        <div style={{float:'none', width:'100%'}}></div>
-        <div className={aboutStyles.grid} style={{float:'right'}}>
-          <Image src="/assets/images/jyoti.png" width="130px"  height="140px"/>
-          <div className={aboutStyles.columnLeft}><h2>Jyoti M Sadanand</h2>
-          Master's of Science (Data Science)<br/>
-          Experience - 23 years.</div>
-        </div>        
       </div>
-      <div className={aboutStyles.row}>
-        <div className={aboutStyles.columnLeft}><b>CALL SUPPORT:</b></div>
-        <div className={aboutStyles.columnRight}>+91 9214 222 112 / 13 / 14</div>
-      </div>
-      <div className={aboutStyles.row}>
-        <div className={aboutStyles.columnLeft}><b>E-Mail SUPPORT:</b></div>
-        <div className={aboutStyles.columnRight}><a href="mailto:contactkotadc@gmail.com">KDC support(ContactKotaDC@gmail.com)</a></div>
-      </div>
-      <div className={aboutStyles.row}>
-        <div className={aboutStyles.columnLeft}><b>LOCATION:</b></div>
-        <div className={aboutStyles.columnRight}>4-J-28, Mahaveer Nagar-3, Kota</div>
+      <div className={aboutStyles.founder}>
+        <div className={aboutStyles.row}>
+          <div className={aboutStyles.columnLeft}><b>CALL SUPPORT:</b></div>
+          <div className={aboutStyles.columnRight}>+91 9214 222 112 / 13 / 14</div>
+        </div>
+        <div className={aboutStyles.row}>
+          <div className={aboutStyles.columnLeft}><b>E-Mail SUPPORT:</b></div>
+          <div className={aboutStyles.columnRight}><a href="mailto:contactkotadc@gmail.com">KDC support(ContactKotaDC@gmail.com)</a></div>
+        </div>
+        <div className={aboutStyles.row}>
+          <div className={aboutStyles.columnLeft}><b>LOCATION:</b></div>
+          <div className={aboutStyles.columnRight}>4-J-28, Mahaveer Nagar-3, Kota</div>
+        </div>
       </div>
     </div>
   );
