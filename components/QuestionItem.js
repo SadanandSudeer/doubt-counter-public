@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ReactPlayer from 'react-player'
 import Link from 'next/link'
 import qStyles from "../styles/Question.module.css";
+import Image from "next/image";
 
 const QuestionItem = ({question, isLeaf}) => {
 
@@ -15,12 +16,16 @@ const QuestionItem = ({question, isLeaf}) => {
         else return x[attr];
     }
 
-    const getPlayer = (videoURL) => {
+    const getPlayer = (videoURL, isleaf) => {
         if (isNull(videoURL) || videoURL === ""){
             return(<></>);
         }
         else{
-            return(<div style={{textAlign: "-moz-center"}}><ReactPlayer url={videoURL} width="90%" height="60%"/></div>);
+            if (isleaf){
+                return(<div style={{textAlign: "-moz-center"}}><ReactPlayer url={videoURL} width="90%" height="60%" style={{margin:"0px auto"}}/></div>);
+            }else{
+                return(<div style={{textAlign: "-moz-center", width: "28px"}}><Image src="/assets/images/video.jpeg" width="26px" height="20px"/></div>);
+            }
         }
     }
   
@@ -75,7 +80,7 @@ const QuestionItem = ({question, isLeaf}) => {
             <div key={"QItem" + question._id} className={qStyles.selectedCard}>
                     {getHtml(question, "questionText", "Question")}
                     <div className={qStyles.questionOptions}>{buildQOptions(question.options, question._id)}</div>
-                    {getPlayer(question.solutionVideoPath)}
+                    {getPlayer(question.solutionVideoPath, isLeaf)}
                     {getHtml(question, "answerText", "Answer")}
                     {getHtml(question, "solutionText", "Solution")}
             </div>
@@ -90,9 +95,13 @@ const QuestionItem = ({question, isLeaf}) => {
                     <a>
                         {getHtml(question, "questionText", "Question")}
                         <div className={qStyles.questionOptions}>{buildQOptions(question.options, question._id)}</div>
-                        {getPlayer(question.solutionVideoPath)}
-                        {getHtml(question, "answerText", "Answer")}
-                        {getHtml(question, "solutionText", "Solution")}
+                        <div className={qStyles.clickMe}><div style={{flex:1}}>Click here to view answer &amp; solution</div><div>{getPlayer(question.solutionVideoPath, isLeaf)}</div></div>
+                        {
+                            //getHtml(question, "answerText", "Answer")
+                        }
+                        {
+                            //getHtml(question, "solutionText", "Solution")
+                        }
                     </a>
                 </Link>
             </div>

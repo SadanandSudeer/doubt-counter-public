@@ -6,6 +6,11 @@ import navStyles from "../styles/Nav.module.css";
 const LeftNavigation = ({data, onSelect}) => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [openBlock, setOpenBlock] = useState("");
+    const imageMap = {
+        "Concepts" : "/assets/images/concepts.png",
+        "Topics" : "/assets/images/topics.png",
+        "Chapters" : "/assets/images/chapters.png"
+    }
     function toggleMenuBlock(name, e){
         if (name === openBlock){
             name = "";
@@ -30,7 +35,18 @@ const LeftNavigation = ({data, onSelect}) => {
 
     const renderLeftNave = (data, onSelect, prop) => {
         if (data && data[prop] && data[prop].length > 0){
-            return (<div className={leftNavStyles.category}><LeftNavBlock id={prop} label={prop} subject={data.Name} isOpen={prop === openBlock} items={data[prop]} onClick={toggleMenuBlock} onSelect={onSelect}/></div>);
+            return (
+                <div className={leftNavStyles.category}>
+                    <LeftNavBlock id={prop} 
+                        label={prop} 
+                        subject={data.Name} 
+                        isOpen={prop === openBlock} 
+                        items={data[prop]} 
+                        img={imageMap[prop]}
+                        onClick={toggleMenuBlock} 
+                        icoClick={() => openNav(null)}                        
+                        onSelect={onSelect}/>
+                </div>);
         }
         else{
             return (<></>);
